@@ -1,0 +1,57 @@
+{% extends 'menu.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="container" >
+        <div class="row" >
+            <div class="col-md-7">
+                <div class="card table-bordered">
+                    <div class="card-header">
+                        <span class="h2">Liste des catégories</span>
+                        </span>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table table-striped ">
+                            <tr>
+                                <th>#</th>
+                                <th>Catégorie</th>
+                                <th>Modifier</th>
+                                <th>Supprimer</th>
+                            </tr>
+                            {% for c in listeCategorie %}
+                                <tr>
+                                    <td>{{ c.id }}</td>
+                                    <td>{{ c.nomCategorie }}</td>
+                                    <td><a href="{{ path ('app_editCategorie', {'id':c.id} ) }}"> <i class="fa fa-edit btn btn-warning"></i> </a> </td>
+                                    <td><a href="{{ path ('app_deleteCategorie', {'id':c.id} ) }}"><i class="fa fa-trash btn btn-danger"></i></a> </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card table-bordered">
+                    <div class="card-header">
+                        <span class="h2">Ajouter catégorie</span>
+                    </div>
+
+                    <div class="card-body">
+                        {{ form(form) }}
+                    </div>
+
+                    <div class="card-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

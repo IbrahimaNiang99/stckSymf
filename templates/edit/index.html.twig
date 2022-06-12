@@ -1,0 +1,30 @@
+{% extends 'menu.html.twig' %}
+
+{% block body %}
+
+
+    <div class="container mt-5">
+        <div class="row offset-1">
+            <div class="col-md-10" >
+                <div class="card">
+                    <div class="card-header" >
+                        <span class="h2">Formulaire de modification</span>
+                        <span>
+                            <a href="{{ path('app_produit') }}" class="btn btn-danger fa fa-close offset-3" >Annuler</a>
+                        </span>
+                    </div>
+
+                    <div class="card-body">
+                        {{ form(form) }}
+
+                    </div>
+
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
