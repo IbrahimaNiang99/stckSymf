@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
@@ -25,7 +26,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/adduser', name: 'app_addUser')]
-    public function add(PersistenceManagerRegistry $doctrine, Request $request): Response
+    public function add(PersistenceManagerRegistry $doctrine, Request $request, UserPasswordHasherInterface $hasher): Response
     {
         $u = new User();
         $form = $this->createForm(UserType::class, $u);
@@ -35,9 +36,10 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
 
             $u = $form->getData();
+            $mdp = $hasher->hashPassword($u, "passer");
             $u->setUtilisateur($this->getUser());
 
-            $u->setPassword("passer");
+            $u->setPassword($mdp);
             $db->persist($u);
             $db->flush();
         }

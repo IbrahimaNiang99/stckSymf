@@ -12,6 +12,7 @@ class SecurityController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(): Response
     {
+
         return $this->redirectToRoute('app_login');
     }
 
@@ -20,6 +21,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
          if ($this->getUser()) {
+
              return $this->redirectToRoute('app_produit');
          }
 
