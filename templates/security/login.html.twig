@@ -69,6 +69,10 @@
                     <div class="alert alert-danger mt-3">Les identifiants sont invalides !!!</div>
                 {% endif %}
 
+                {% if sms is defined %}
+                    <div class="alert alert-danger mt-3">{{ sms }}</div>
+                {% endif %}
+
                 <div class="text-center p-t-90">
                     <a class="txt1" href="#">
                         Forgot Password?

@@ -64,14 +64,15 @@ class ProduitController extends AbstractController
 
 
     #[Route('/deleteProduit', name: 'app_deleteProduit')]
-    public function delete(PersistenceManagerRegistry $doctrine, Request $request): Response
+    public function delete(PersistenceManagerRegistry $doctrine): Response
     {
-        $id = $_GET['id'];
+        //$id =
         $db = $doctrine->getManager();
-        $p = $db->getRepository(Produit::class)->find($id);
-        $db->remove($p);
-        $db->flush();
-
+        $p = $db->getRepository(Produit::class)->find($_GET['id']);
+        if ($p != null) {
+            $db->remove($p);
+            $db->flush();
+        }
         return $this->redirectToRoute('app_produit');
     }
 }
